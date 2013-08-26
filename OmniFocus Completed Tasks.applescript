@@ -1,6 +1,8 @@
 (*
-OmniFocus - Weekly Task Report Generator
+OmniFocus Completed Tasks Report Generator
+
 Inspired by various sources and modified to use Redcarpet Markdown by Smiledawgg
+
 Version 1.1
 August 21, 2013
 
