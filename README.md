@@ -17,3 +17,8 @@ To have these scripts execute automatically when clicked:
 ### OmniFocus Completed Tasks.applescript
 
 Collect all completed tasks from OmniFocus and compile into Redcarpet Markdown format. Currently only supports tasks up to two levels deep. If a task is deeper, only its parent and the containing project will be printed out. Any heirarchy in-between will not be shown.
+
+### OmniFocus Weekly Report.applescript
+
+A last week - this week style status report.
+Lists all completed tasks for last week (Sun - Sat) and all tasks due during the current week, including any backlogged task with due dates before the current week.
