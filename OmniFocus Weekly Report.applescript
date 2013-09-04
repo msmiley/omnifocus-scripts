@@ -34,11 +34,11 @@ set theProgressDetail to "# Weekly Report" & return & return & "## Last Week " &
 set completedTasksDetected to false
 tell application "OmniFocus 1.10.4"
 	tell default document
-		set refCompletedTasks to a reference to (flattened tasks where (completion date is greater than theStartDate and completion date is less than theEndDate))
+		set refTasks to a reference to (flattened tasks where (completion date is greater than theStartDate and completion date is less than theEndDate))
 		
-		if refCompletedTasks is not equal to {} then
+		if refTasks is not equal to {} then
 			set completedTasksDetected to true
-			set {lstName, lstContext, lstProject, lstParent, lstDate} to {name, name of its context, name of its containing project, name of its parent task, completion date} of refCompletedTasks
+			set {lstName, lstContext, lstProject, lstParent, lstDate} to {name, name of its context, name of its containing project, name of its parent task, completion date} of refTasks
 			set strText to ""
 			set curProject to ""
 			set curParent to ""
@@ -95,11 +95,10 @@ set theProgressDetail to theProgressDetail & return & "## This Week" & return & 
 tell application "OmniFocus 1.10.4"
 	tell default document
 		
-		set refCompletedTasks to a reference to (flattened tasks where (due date is less than theEndDate and completed is false))
+		set refTasks to a reference to (flattened tasks where (completed is false))
 		
-		if refCompletedTasks is not equal to {} then
-			set completedTasksDetected to true
-			set {lstName, lstContext, lstProject, lstParent, lstDate} to {name, name of its context, name of its containing project, name of its parent task, due date} of refCompletedTasks
+		if refTasks is not equal to {} then
+			set {lstName, lstContext, lstProject, lstParent, lstDate} to {name, name of its context, name of its containing project, name of its parent task, due date} of refTasks
 			set strText to ""
 			set curProject to ""
 			set curParent to ""
@@ -143,4 +142,4 @@ tell application "OmniFocus 1.10.4"
 	end tell
 end tell
 
-set refCompletedTasks to ""
+set refTasks to ""
