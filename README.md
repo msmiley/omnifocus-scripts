@@ -1,6 +1,6 @@
-# AppleScripts
+# OmniFocusScripts
 
-Collection of useful AppleScripts for various tasks.
+Collection of useful AppleScripts for OmniFocus.
 
 All these scripts are in raw `.applescript` form, meaning they will open in the *AppleScript Editor* when clicked.
 
@@ -9,7 +9,7 @@ To have these scripts execute automatically when clicked:
 1. Open them in the *AppleScript Editor*
 1. Select *Export* from the *File* menu
 1. Change *File Format* to *Application*
-1. Move `.app` package to desired location, usually somewhere under `~/Library/Scripts`
+1. Move `.app` package to `~/Library/Scripts/Applications/OmniFocus`
 
 
 ## Descriptions
@@ -21,4 +21,4 @@ Collect all completed tasks from OmniFocus and compile into Redcarpet Markdown f
 ### OmniFocus Weekly Report.applescript
 
 A last week - this week style status report.
-Lists all completed tasks for last week (Sun - Sat) and all tasks due during the current week, including any backlogged task with due dates before the current week.
+Lists all completed tasks for last week (Sun - Sat) and all tasks due during the current week, including any backlogged tasks with due dates before the current week or any without due dates.
