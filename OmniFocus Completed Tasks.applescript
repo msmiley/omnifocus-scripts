@@ -10,7 +10,7 @@ August 21, 2013
 
 -- Prompt the user to choose a scope for the report
 activate
-set theReportScope to choose from list {"Today", "Yesterday", "This Week", "Last Week", "This Month"} default items {"Last Week"} with prompt "Generate a report for:" with title "OmniFocus Completed Task Report"
+set theReportScope to choose from list {"Today", "Yesterday", "This Week", "Last Week", "This Month", "Past Year"} default items {"Last Week"} with prompt "Generate a report for:" with title "OmniFocus Completed Task Report"
 if theReportScope = false then return
 set theReportScope to item 1 of theReportScope
 
@@ -51,6 +51,12 @@ else if theReportScope = "This Month" then
 	end repeat
 	repeat until (month of theEndDate) is not equal to (month of theStartDate)
 		set theEndDate to theEndDate + 1 * days
+	end repeat
+	set theEndDate to theEndDate - 1 * days
+	set theDateRange to (date string of theStartDate) & " through " & (date string of theEndDate)
+else if theReportScope = "Past Year" then
+	repeat until (day of theStartDate) = 1
+		set theStartDate to theStartDate - 364 * days
 	end repeat
 	set theEndDate to theEndDate - 1 * days
 	set theDateRange to (date string of theStartDate) & " through " & (date string of theEndDate)
