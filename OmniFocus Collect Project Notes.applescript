@@ -15,7 +15,7 @@ set theFileName to "Project_Notes_" & (month of todaysDate as integer) & "_" & (
 set theProgressDetail to "# Project Notes" & return & "For " & short date string of todaysDate & return
 
 -- get a list of projects
-tell application "OmniFocus 1.10.4"
+tell application "OmniFocus"
 	tell default document
 		set refProjects to a reference to (flattened projects where (completion date is greater than theStartDate and completion date is less than theEndDate))
 		
