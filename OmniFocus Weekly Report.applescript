@@ -32,7 +32,7 @@ set theProgressDetail to "# Weekly Report" & return & return & "## Last Week " &
 
 -- generate section of last week's completed tasks
 set completedTasksDetected to false
-tell application "OmniFocus 1.10.4"
+tell application "OmniFocus"
 	tell default document
 		set refTasks to a reference to (flattened tasks where (completion date is greater than theStartDate and completion date is less than theEndDate))
 		
