@@ -40,25 +40,36 @@ tell application "OmniFocus"
 			set completedTasksDetected to true
 			set {lstName, lstContext, lstProject, lstParent, lstDate} to {name, name of its context, name of its containing project, name of its parent task, completion date} of refTasks
 			set strText to ""
-			set curProject to ""
-			set curParent to ""
+			set lastProject to ""
+			set lastParent to ""
 			set indentLevel to 0
 			repeat with iTask from 1 to length of lstName
-				set {strName, varContext, varProject, varParent, varDate} to {item iTask of lstName, item iTask of lstContext, item iTask of lstProject, item iTask of lstParent, item iTask of lstDate}
+				set {curTask, curContext, curProject, curParent, compDate} to {item iTask of lstName, item iTask of lstContext, item iTask of lstProject, item iTask of lstParent, item iTask of lstDate}
 				
-				-- only print tasks right below project-level
-				if (varParent is equal to varProject) then
-					
-					if (varProject is not missing value and (curProject is not equal to varProject)) then
-						set curProject to varProject
-						set strText to strText & return & "### " & varProject & return
-						set indentLevel to 0
-					end if
-					
-					if varDate is not missing value then set strText to strText & "- " & short date string of varDate & " - "
-					if varContext is not missing value then set strText to strText & "[" & varContext & "] - "
-					set strText to strText & strName & return
+				if (curProject is not missing value and (curProject is not equal to lastProject)) then -- new project
+					set lastProject to curProject
+					set strText to strText & return & "### " & curProject & return -- print project header
+					set indentLevel to 0 -- reset indent level
 				end if
+				
+				if (curParent is not equal to lastProject) then -- descending one level
+				if (curParent is not equal to lastParent) then -- new parent
+					set lastParent to curParent
+					set indentLevel to 1
+					set strText to strText & return & "- " & curParent & return
+				end if
+				end if
+				
+				
+				repeat with level from 1 to indentLevel
+					set strText to strText & "	"
+				end repeat
+				
+				if compDate is not missing value then set strText to strText & "- " & short date string of compDate & " - "
+				if curContext is not missing value then set strText to strText & "[" & curContext & "] - "
+				set strText to strText & curTask & return
+				
+				--end if
 			end repeat
 		end if
 	end tell
@@ -92,7 +103,7 @@ set theDateRange to (date string of theStartDate) & " through " & (date string o
 
 set theProgressDetail to theProgressDetail & return & "## This Week" & return & short date string of theStartDate & " to " & short date string of theEndDate & return
 
-tell application "OmniFocus 1.10.4"
+tell application "OmniFocus"
 	tell default document
 		
 		set refTasks to a reference to (flattened tasks where (completed is false))
